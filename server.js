@@ -1,26 +1,5 @@
-// server.js
-// load the things we need
 var express = require('express');
 var app = express();
-
-// set the view engine to ejs
-app.set('view engine', 'ejs');
-
-// use res.render to load up an ejs view file
-
-// index page 
-app.get('/', function(req, res) {
-    res.render('pages/index');
-});
-
-// about page 
-app.get('/about', function(req, res) {
-    res.render('pages/about');
-});
-
-console.log('App is runnins at http://localhost:8082');
-app.listen(8082);
-
 var mysql = require('mysql')
 var connection = mysql.createConnection({
   host     : 'www.db4free.net',
@@ -38,3 +17,48 @@ connection.query('SELECT 1 + 1 AS solution', function (err, rows, fields) {
 })
 
 connection.end()
+
+//all list of student
+app.get('/students', function (req, res) {
+    
+    var sql ='select * from students';
+
+    connection.query(sql,function (err, rows, fields){
+        if (err) throw err
+        res.render('pages/students',{students:rows});
+       
+    console.log('The student is: ', rows[0].students)
+    
+})
+});
+
+//all list of subjects
+app.get('/subjects', function (req, res) {
+    
+    var sql ='select * from subjects';
+    connection.query(sql,function (err, rows, fields){
+        if (err) throw err
+        res.render('pages/subjects',{subjects:rows});
+    console.log('The subject is: ', rows[0].subjects);
+
+})
+});
+
+
+
+
+app.set('view engine', 'ejs');
+
+
+app.get('/', function(req, res) {
+    res.render('pages/index');
+});
+
+ 
+app.get('/about', function(req, res) {
+    res.render('pages/about');
+});
+
+console.log('App is runnins at http://localhost:8082');
+app.listen(8082);
+
