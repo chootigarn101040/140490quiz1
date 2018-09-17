@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/chootigarn101040/140490quiz1#readme",
   "dependencies": {
+    "ejs": "^2.6.1",
     "express": "^4.16.3",
     "mysql": "^2.16.0",
     "nodemon": "^1.18.4"
