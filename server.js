@@ -7,17 +7,12 @@ var connection = mysql.createConnection({
   password : 'abc123**',
   database : 'db140390'
 });
-
-connection.connect()
-
-connection.query('SELECT 1 + 1 AS solution', function (err, rows, fields) {
-  if (err) throw err
-
-  console.log('The solution is: ', rows[0].solution)
-})
-
-connection.end()
-
+connection.connect();
+app.set('view engine', 'ejs');
+//home
+app.get('/', function (req, res) {
+    res.render('pages/index');
+});
 //all list of student
 app.get('/students', function (req, res) {
     
@@ -44,21 +39,9 @@ app.get('/subjects', function (req, res) {
 })
 });
 
-
-
-
-app.set('view engine', 'ejs');
-
-
-app.get('/', function(req, res) {
+app.get('/index', function (req, res) {
     res.render('pages/index');
 });
+console.log('App is running at http://localhost:8082');
 
- 
-app.get('/about', function(req, res) {
-    res.render('pages/about');
-});
-
-console.log('App is runnins at http://localhost:8082');
 app.listen(8082);
-
